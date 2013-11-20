@@ -1,0 +1,30 @@
+form span {
+    display: inline-block;
+    text-align: right;
+}
+
+li {
+    background-color: white;
+    width: 50%;
+    list-style-type: none;
+}
+
+
+li p span{
+    font-weight: bold;
+}
+
+
+body {
+    background-color: rgb(000,180,220);
+}
+
+h1 {
+    background-color: rgb(000,130,220);
+    border: 1px solid black;
+    text-align: center;
+}
+
+li form {
+    display: inline;
+}

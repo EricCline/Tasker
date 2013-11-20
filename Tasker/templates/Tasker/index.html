@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'Tasker/style.css' %}" />
+
+<h1>Tasker - A Django App</h1>
+
+<form action="{% url 'add' %}" method="post">
+{% csrf_token %}
+    
+    <span>
+        <label for="form_title">Title</label><input type="text" name="form_title" id="form_title"/><br />
+        <label for="form_body">Body</label><input type="text" name="form_body" id="form_body"/><br />
+        <label for="form_duedate">Due Date</label><input type="text" name="form_duedate" id="form_duedate"/></br>
+        <input type="submit" value="Add Task" />
+    </span></br>
+    
+    
+</form>
+    
+
+{% if current_tasks %}
+    <ul>
+    {% for task in current_tasks %}
+        <li><p><span>Title: </span>{{task.title}}</p>
+            <p><span>Body: </span>{{task.body}}</p>
+            <p><span>Due Date: </span>{{task.duedate}}</p>
+            <form action="{% url 'complete' task.id%}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Complete Task" />
+            </form>
+            <form action="{% url 'edit' task.id%}" method="post">
+                {% csrf_token %}
+                <span>
+                    <label for="form_title">Title</label><input type="text" name="form_title" id="form_title"/><br />
+                    <label for="form_body">Body</label><input type="text" name="form_body" id="form_body"/><br />
+                    <label for="form_duedate">Due Date</label><input type="text" name="form_duedate" id="form_duedate"/></br>
+                    <input type="submit" value="Update Task" />
+                </span></br>
+            </form></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tasks exist!</p>
+{% endif %}
